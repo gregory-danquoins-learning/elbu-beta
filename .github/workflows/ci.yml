@@ -61,6 +61,8 @@ jobs:
           envs: DB_PASSWORD,MYSQL_ROOT_PASSWORD,JWT_SECRET,MAIL_HOST,MAIL_PORT,MAIL_USERNAME,MAIL_PASSWORD
           script: |
             set -e
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
             DEPLOY_DIR=/opt/elbu-beta
 
             # Cloner ou mettre à jour le repo
