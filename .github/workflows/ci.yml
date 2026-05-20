@@ -61,15 +61,27 @@ jobs:
           envs: DB_PASSWORD,MYSQL_ROOT_PASSWORD,JWT_SECRET,MAIL_HOST,MAIL_PORT,MAIL_USERNAME,MAIL_PASSWORD
           script: |
             set -e
-            mkdir -p ~/.ssh
-            ssh-keyscan github.com >> ~/.ssh/known_hosts
             DEPLOY_DIR=/opt/elbu-beta
 
-            # Cloner ou mettre à jour le repo
+            # Cloner ou mettre à jour le repo principal
             if [ -d "$DEPLOY_DIR/.git" ]; then
               git -C $DEPLOY_DIR pull
             else
               git clone https://github.com/gregory-danquoins-learning/elbu-beta.git $DEPLOY_DIR
+            fi
+
+            # Cloner ou mettre à jour le backend
+            if [ -d "$DEPLOY_DIR/elbub/.git" ]; then
+              git -C $DEPLOY_DIR/elbub pull
+            else
+              git clone https://github.com/gregory-danquoins-learning/elbub.git $DEPLOY_DIR/elbub
+            fi
+
+            # Cloner ou mettre à jour le frontend
+            if [ -d "$DEPLOY_DIR/elbuf/.git" ]; then
+              git -C $DEPLOY_DIR/elbuf pull
+            else
+              git clone https://github.com/gregory-danquoins-learning/elbuf.git $DEPLOY_DIR/elbuf
             fi
 
             # Écrire le fichier .env
