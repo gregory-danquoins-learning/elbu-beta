@@ -1,0 +1,21 @@
+# Sous-projets (ont leurs propres repos)
+elbub/
+elbuf/
+
+# Médias uploadés
+uploads/
+
+# Maquettes et fichiers de design
+elbu-pages/
+
+# Documents de présentation
+Presentation/
+
+# Fichiers sensibles
+.env
+.env.*
+*.secret
+
+# OS
+.DS_Store
+Thumbs.db
